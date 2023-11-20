@@ -1,73 +1,107 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+초기 설정
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+nest 프로젝트를만들고
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+npm install --save @nestjs/graphql apollo-server-express graphql
+npm install --save @nestjs/apollo
 
-## Description
+를 설치하여 graphql을 사용할 준비를 마쳤습니다.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
 
-## Installation
+폴더구조
 
-```bash
-$ npm install
-```
+src/
+├── api/
+│ ├── survey/
+│ │ ├── dto/
+│ │ │ └── create-survey.dto.ts
+│ │ ├── entities/
+│ │ │ └── survey.entity.ts
+│ │ ├── survey.module.ts
+│ │ ├── survey.resolver.ts
+│ │ └── survey.service.ts
+├── commons/
+│ └── graphql/
+│ └── schema.gql
+├── app.module.ts
+├── main.ts
 
-## Running the app
+이런식으로 잡아서 시작하였습니다.
 
-```bash
-# development
-$ npm run start
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
 
-# watch mode
-$ npm run start:dev
+간략하게 구성해본 테이블
 
-# production mode
-$ npm run start:prod
-```
+질문 테이블--
+컬럼 > pk - 질문 - 내용
 
-## Test
+선택지 테이블--
+컬럼 > pk - 질문테이블pk(1:N) - 선택지의 내용 - 점수 - 순서
 
-```bash
-# unit tests
-$ npm run test
+설문 테이블--
+컬럼 > pk - 설문이름 - 설문설명 - 질문pk 배열로(배열 순서가 설문 순서라고 생각함)
 
-# e2e tests
-$ npm run test:e2e
+답변 테이블--
+컬럼 > pk -- 설문테이블pk - user테이블pk(유저테이블 있다고 가정) - 선택지pk 배열로 - 스코어합
 
-# test coverage
-$ npm run test:cov
-```
+으로 설계했습니다.
 
-## Support
+각 테이블의 간단한CRUD와
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+질문 테이블에는 질문만
+선택지 테이블에는 질문에대한 선택지만 등록
+설문 테이블에는 설문들만 등록되잇어서
+궁극적으로 프론트단에 설문을 전체조회하여 뿌려주고
+클라이언트가 하나의 설문을 들어가면
 
-## Stay in touch
+survey의 getQuestionsBySurveyId메소드를 활용해 데이터가
+{
+"data": {
+"getQuestionsBySurveyId": [
+{
+"content": "어디를 가고 싶으신가요 ",
+"choices": [
+"서울",
+"뉴욕",
+"파리",
+"상하이",
+"사과"
+]
+},
+{
+"content": "무엇을 먹고 싶으신가요 ",
+"choices": [
+"사과",
+"케일",
+"키위",
+"포도"
+]
+}
+]
+}
+}
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+이런식으로 나오도록 하여 한번에 해당 설문의 질문과 답변을 가져올수 잇도록 API를 설계 했습니다.
 
-## License
+답변테이블은 저 데이터가 뿌려진 프론트단에서 프론트개발자가 해당 질문에 대한 답변들의 배열들과 점수의 합 userId를 주면
+컬럼이 존재하는것만으로 그유저가 설문하나를 완료한것으로 간주하면 될 것 같다고 생각했습니다.
 
-Nest is [MIT licensed](LICENSE).
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
+
+에러 및 로그처리는
+
+commons - filters - custom-exception.filter.ts파일로 구현했습니다.
+예외필터를 전역으로 등록하여 graphql에서 throw가 나거나 404에러가나거나 할때 모두 공통으로 처리하게 간단히 구현하였습니다
+
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
+＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
+
+서버실행
+
+서버는 로컬에서 실행하였고
+npm start로 실행하였습니다.
+http://localhost:4000/graphql에 들어가서 api가 잘되는지 확인하였습니다.(4000포트/깃에서 받아서 vscode에서 실행하면 될 것 같습니다.)
