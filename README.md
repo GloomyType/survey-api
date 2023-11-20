@@ -1,5 +1,3 @@
-markdown
-Copy code
 # Nest GraphQL Survey API
 
 This project sets up a Nest.js project with GraphQL for building a survey API.
