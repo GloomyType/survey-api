@@ -1,0 +1,40 @@
+모든 질문 가져오기
+
+query {
+  getAllQuestions {
+    id
+    content
+  }
+}
+
+----------------
+질문 1개 등록
+
+mutation {
+  createQuestion(input: {
+    content: "무엇을 먹고싶으신가요 "
+  }) {
+    id
+    content
+  }
+}
+----------------
+
+질문 수정 by id
+
+mutation {
+  updateQuestion(id: 3, input: {  content: "수정된 내용입니다." }) {
+    id
+    content
+  }
+}
+
+------------------
+
+질문 삭제 by id
+
+mutation {
+  deleteQuestion(id: 3)
+}
+
+

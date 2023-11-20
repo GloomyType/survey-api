@@ -1,0 +1,83 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Choice {
+  id: Int!
+  questionId: Int!
+  contents: String!
+  score: Int!
+  order: Int!
+  question: Question!
+}
+
+type Question {
+  id: Float!
+  content: String!
+}
+
+type Answer {
+  id: Int!
+  userId: Int!
+  answerNumbers: [Int!]
+  scoreSum: Int!
+}
+
+type Survey {
+  id: Int!
+  name: String!
+  description: String!
+  questionNumbers: [Int!]
+}
+
+type QuestionResponse {
+  content: String!
+  choices: [String!]!
+}
+
+type Query {
+  getAllQuestions: [Question!]!
+  getQuestionById(id: Float!): Question!
+  getAllChoicesByQuestionId(questionId: Float!): [Choice!]!
+  getChoiceById(id: Float!): Choice!
+  getAllSurveys: [Survey!]!
+  getQuestionsBySurveyId(id: Float!): [QuestionResponse!]!
+  answers: [Answer!]!
+  answer(id: Int!): Answer!
+}
+
+type Mutation {
+  createQuestion(input: QuestionInput!): Question!
+  updateQuestion(id: Float!, input: QuestionInput!): Question!
+  deleteQuestion(id: Float!): Boolean!
+  createChoice(questionId: Float!, input: ChoiceInput!): Choice!
+  updateChoice(id: Float!, input: ChoiceInput!): Choice!
+  deleteChoice(id: Float!): Boolean!
+  createSurvey(input: SurveyInput!): Survey!
+  updateSurvey(id: Float!, input: SurveyInput!): Survey!
+  deleteSurvey(id: Float!): Boolean!
+  createAnswer(answerInput: AnswerInput!, surveyId: Int!): Answer!
+  updateAnswer(id: Int!, answerInput: AnswerInput!): Answer!
+  deleteAnswer(id: Int!): Boolean!
+}
+
+input QuestionInput {
+  content: String!
+}
+
+input ChoiceInput {
+  contents: String!
+  score: Int!
+}
+
+input SurveyInput {
+  name: String!
+  description: String!
+  questionNumbers: [Int!]!
+}
+
+input AnswerInput {
+  userId: Int!
+  answerNumbers: [Int!]
+  scoreSum: Int!
+}

@@ -1,0 +1,50 @@
+모든 설문 가져오기
+
+query {
+  getAllSurveys {
+    id
+    name
+    description
+    questionNumbers
+  }
+}
+
+----------------
+설문 1개 등록
+
+mutation {
+  createSurvey(input: {
+    name: "취향조사"
+    description: "당신의 취향을 아는 설문입니다."
+    questionNumbers: [1,2,]
+  }) {
+    id
+    name
+    description
+    questionNumbers
+  }
+}
+----------------
+
+설문 수정 by id
+
+mutation {
+  updateSurvey(id: 1, input: {
+    name: "취향설문조사"
+    description: "당신의 취향을 아는 설문입니다."
+    questionNumbers: [2,3]
+  }) {
+    id
+    name
+    description
+    questionNumbers
+  }
+}
+
+------------------
+
+설문 삭제 by id
+
+mutation {
+  deleteSurvey(id: 1)
+}

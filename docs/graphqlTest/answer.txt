@@ -1,0 +1,54 @@
+모든 답변 가져오기
+
+query {
+  answers {
+    id
+    userId
+    answerNumbers
+    scoreSum
+  }
+}
+
+----------------
+답변 1개 가져오기 
+
+query {
+  answer(id: 4) {
+    id
+    userId
+    answerNumbers
+    scoreSum
+  }
+}
+--------------------
+답변 1개 등록
+
+mutation {
+  createAnswer(answerInput: { userId: 1, answerNumbers: [2,5], scoreSum: 7 }surveyId:1) {
+    id
+    userId
+    answerNumbers
+    scoreSum
+  }
+}
+
+----------------
+
+답변 수정 by id
+
+mutation {
+  updateAnswer(id: 5, answerInput: { userId: 1, answerNumbers: [2,5], scoreSum: 6 }) {
+    id
+    userId
+    answerNumbers
+    scoreSum
+  }
+}
+
+------------------
+
+답변 삭제 by id
+
+mutation {
+  deleteAnswer(id: 4)
+}

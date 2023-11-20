@@ -1,0 +1,70 @@
+모든 선택지 가져오기 by 질문id
+
+query {
+  getAllChoicesByQuestionId(questionId: 1) {
+    id
+    contents
+    score
+    order
+  }
+}
+
+---------------
+
+선택지 1개 가져오기 by 선택지id
+query {
+  getChoiceById(id: 2) {
+    id
+    contents
+    score
+    order
+  }
+}
+
+----------------
+선택지 1개 등록
+
+mutation {
+  createChoice(
+    questionId: 1
+    input: {
+      contents: "사과"
+      score: 6
+    }
+  ) {
+    id
+     question {
+      id
+    }
+    contents
+    score
+    order
+  }
+}
+----------------
+
+선택지 수정 by id
+
+mutation {
+  updateChoice(
+    id: 2
+    input: {
+      contents: "뉴욕"
+      score: 4
+    }
+  ) {
+    id
+    contents
+    score
+    order
+  }
+}
+
+------------------
+
+선택지 삭제 by id
+
+mutation {
+  deleteChoice(id: 1)
+}
+
